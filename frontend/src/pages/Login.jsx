@@ -2,7 +2,8 @@ import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Car, Mail, Lock, AlertCircle } from 'lucide-react';
-
+import './Login.css';
+import logo from '../assets/logo.png';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -32,10 +33,14 @@ const Login = () => {
   return (
     <div className="auth-container">
       <div className="auth-card animate-fade-in">
-        <div className="auth-header">
-          <h1><Car size={32} /> CampusPark</h1>
-          <p>Sign in to your account</p>
-        </div>
+<div className="auth-header">
+  <div className="brand">
+    <img src={logo} alt="ParkFlow Logo" className="brand-logo"/>
+    <span className="brand-name">ParkFlow</span>
+  </div>
+
+  <p>Sign in to your account</p>
+</div>
 
         {error && (
           <div className="alert alert-error">

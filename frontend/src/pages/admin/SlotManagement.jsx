@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import api from '../../api/axios';
 import { Plus, Trash2, MapPin, AlertCircle } from 'lucide-react';
-
+import  './SlotManagement.css';
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 const SlotManagement = () => {
   const [slots, setSlots] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,10 +58,13 @@ const SlotManagement = () => {
       setError(err.response?.data?.message || 'Failed to delete slot');
     }
   };
-
+const navigate = useNavigate();
   return (
     <div className="main-content flex gap-2" style={{ flexDirection: 'column' }}>
-      
+          <div className="back-button" onClick={() => navigate("/admin")}>
+      <ArrowLeft size={22} />
+      <span></span>
+    </div>
       <div className="card animate-fade-in mb-2">
         <h2 className="flex align-center gap-sm mb-1"><MapPin size={24} /> Create New Parking Slot</h2>
         

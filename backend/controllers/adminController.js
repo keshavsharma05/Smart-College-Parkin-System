@@ -4,33 +4,49 @@ const Booking = require('../models/Booking');
 
 exports.getDashboardStats = async (req, res) => {
   try {
+
     const totalUsers = await User.countDocuments();
+
     const totalSlots = await ParkingSlot.countDocuments();
-    const availableSlots = await ParkingSlot.countDocuments({ status: 'AVAILABLE' });
-    const occupiedSlots = await ParkingSlot.countDocuments({ status: 'OCCUPIED' });
-    
-    // As per requirements: Reserved teacher slots, Student slots
-    const reservedTeacherSlots = await ParkingSlot.countDocuments({ status: 'RESERVED', slotType: 'TEACHER' });
-    const studentSlots = await ParkingSlot.countDocuments({ slotType: 'STUDENT' });
-    
-    const activeBookings = await Booking.countDocuments({ status: 'ACTIVE' });
-    const completedBookings = await Booking.countDocuments({ status: 'COMPLETED' });
+
+    const availableSlots = await ParkingSlot.countDocuments({
+      status: "AVAILABLE"
+    });
+
+    // teacher totals
+    const teacherTotal = await ParkingSlot.countDocuments({
+      slotType: "TEACHER"
+    });
+
+    const teacherOccupied = await ParkingSlot.countDocuments({
+      slotType: "TEACHER",
+      status: { $ne: "AVAILABLE" }
+    });
+
+    // student totals
+    const studentTotal = await ParkingSlot.countDocuments({
+      slotType: "STUDENT"
+    });
+
+    const studentOccupied = await ParkingSlot.countDocuments({
+      slotType: "STUDENT",
+      status: { $ne: "AVAILABLE" }
+    });
 
     res.json({
       totalUsers,
       totalSlots,
       availableSlots,
-      occupiedSlots,
-      reservedTeacherSlots,
-      studentSlots,
-      activeBookings,
-      completedBookings
+      teacherTotal,
+      teacherOccupied,
+      studentTotal,
+      studentOccupied
     });
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
-
 exports.createSlot = async (req, res) => {
   const { slotNumber, slotType, location } = req.body;
   try {

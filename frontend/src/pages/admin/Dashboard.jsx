@@ -9,7 +9,7 @@ import {
   AlertTriangle,
   FileText
 } from 'lucide-react';
-
+import './Dashboard.css';
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -33,12 +33,19 @@ const AdminDashboard = () => {
 
   return (
     <div className="main-content">
-      <div className="flex justify-between align-center mb-2">
-        <h2>Admin Overview</h2>
-        <Link to="/admin/slots" className="btn btn-primary">
-          <MapPin size={18} /> Manage Slots
-        </Link>
-      </div>
+<div className="flex justify-between align-center mb-2">
+  <h2>Admin Overview</h2>
+
+  <div className="admin-actions">
+    <Link to="/admin/slots" className="btn btn-primary">
+      <MapPin size={18}/> Manage Slots
+    </Link>
+
+    <Link to="/admin/create-staff" className="btn btn-primary">
+      <Users size={18}/> Create Staff
+    </Link>
+  </div>
+</div>
 
       <div className="stats-grid">
         <div className="card stat-card">
@@ -71,35 +78,26 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        <div className="card stat-card">
-          <div className="stat-icon" style={{ background: 'rgba(239, 68, 68, 0.1)', color: 'var(--danger)' }}>
-            <AlertTriangle size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>Occupied Slots</h3>
-            <p>{stats.occupiedSlots}</p>
-          </div>
-        </div>
+<div className="card stat-card">
+  <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)' }}>
+    <MapPin size={24} />
+  </div>
+  <div className="stat-info">
+    <h3>Student Slots Used</h3>
+    <p>{stats.studentOccupied} / {stats.studentTotal}</p>
+  </div>
+</div>
         
-        <div className="card stat-card">
-          <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: 'var(--warning)' }}>
-            <Car size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>Reserved Teacher Slots</h3>
-            <p>{stats.reservedTeacherSlots}</p>
-          </div>
-        </div>
+<div className="card stat-card">
+  <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: 'var(--warning)' }}>
+    <Car size={24} />
+  </div>
+  <div className="stat-info">
+    <h3>Teacher Slots Used</h3>
+    <p>{stats.teacherOccupied} / {stats.teacherTotal}</p>
+  </div>
+</div>
         
-        <div className="card stat-card">
-          <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: 'var(--success)' }}>
-            <FileText size={24} />
-          </div>
-          <div className="stat-info">
-            <h3>Active Bookings</h3>
-            <p>{stats.activeBookings}</p>
-          </div>
-        </div>
       </div>
     </div>
   );

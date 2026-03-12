@@ -1,0 +1,332 @@
+/* =========================
+   PAGE LAYOUT
+========================= */
+
+.main-content{
+max-width:1100px;
+margin:auto;
+padding:60px 28px 80px;
+display:flex;
+flex-direction:column;
+gap:28px;
+font-family:Inter,system-ui;
+color:#e6e6e6;
+}
+
+
+
+/* =========================
+   PANEL / CARD
+========================= */
+
+.card{
+
+background:rgba(22,22,24,0.55);
+
+border:1px solid rgba(255,255,255,0.08);
+
+border-radius:20px;
+
+padding:28px;
+
+backdrop-filter:blur(20px);
+
+box-shadow:0 15px 40px rgba(0,0,0,0.6);
+
+transition:all .25s ease;
+
+}
+
+.card:hover{
+border-color:rgba(255,255,255,0.16);
+}
+
+
+
+/* =========================
+   HEADERS
+========================= */
+
+.card h2{
+font-size:20px;
+font-weight:600;
+display:flex;
+align-items:center;
+gap:8px;
+margin-bottom:20px;
+}
+
+
+
+/* =========================
+   ALERTS
+========================= */
+
+.alert{
+display:flex;
+align-items:center;
+gap:8px;
+
+padding:12px 14px;
+
+border-radius:10px;
+
+margin-bottom:16px;
+
+font-size:14px;
+
+backdrop-filter:blur(10px);
+}
+
+.alert-error{
+background:rgba(255,255,255,0.06);
+border:1px solid rgba(255,255,255,0.12);
+}
+
+.alert-success{
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.15);
+}
+
+
+
+/* =========================
+   FORM GRID
+========================= */
+
+.stats-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
+gap:18px;
+
+align-items:end;
+
+}
+
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.form-group label{
+font-size:12px;
+color:#b5b5b5;
+}
+
+.form-control{
+
+height:40px;
+
+padding:0 12px;
+
+border-radius:10px;
+
+border:1px solid rgba(255,255,255,0.12);
+
+background:rgba(28,28,30,0.6);
+
+color:white;
+
+outline:none;
+
+transition:all .2s;
+}
+
+.form-control:focus{
+
+border-color:rgba(255,255,255,0.35);
+
+background:rgba(30,30,32,0.8);
+
+}
+
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+display:inline-flex;
+align-items:center;
+gap:6px;
+
+padding:8px 14px;
+
+border-radius:10px;
+
+border:none;
+
+cursor:pointer;
+
+font-size:14px;
+
+font-weight:600;
+
+transition:all .2s;
+}
+
+.btn-primary{
+background:white;
+color:black;
+}
+
+.btn-primary:hover{
+background:#e5e5e5;
+transform:translateY(-1px);
+}
+
+.btn-danger{
+background:rgba(255,255,255,0.08);
+color:white;
+border:1px solid rgba(255,255,255,0.18);
+}
+
+.btn-danger:hover{
+background:rgba(255,255,255,0.16);
+}
+
+.btn-sm{
+padding:6px 10px;
+}
+
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container{
+overflow-x:auto;
+margin-top:10px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:14px;
+}
+
+
+
+thead th{
+
+text-align:left;
+
+padding:14px 12px;
+
+font-size:12px;
+
+letter-spacing:.5px;
+
+color:#a0a0a0;
+
+border-bottom:1px solid rgba(255,255,255,0.1);
+
+}
+
+
+
+tbody td{
+
+padding:14px 12px;
+
+border-bottom:1px solid rgba(255,255,255,0.06);
+
+}
+
+
+
+tbody tr{
+
+transition:all .15s ease;
+
+}
+
+tbody tr:hover{
+
+background:rgba(255,255,255,0.04);
+
+}
+
+
+
+/* =========================
+   BADGES
+========================= */
+
+.badge{
+
+padding:4px 8px;
+
+border-radius:6px;
+
+font-size:11px;
+
+font-weight:600;
+
+letter-spacing:.4px;
+
+text-transform:uppercase;
+
+}
+
+.badge-success{
+background:rgba(255,255,255,0.12);
+color:white;
+}
+
+.badge-warning{
+background:rgba(255,255,255,0.08);
+color:#ddd;
+}
+
+.badge-danger{
+background:rgba(255,255,255,0.05);
+color:#bbb;
+}
+
+.badge-info{
+background:rgba(255,255,255,0.12);
+color:white;
+}
+
+.back-button{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  color:#cbd5f5;
+  font-weight:500;
+  margin-bottom:10px;
+  width:fit-content;
+  padding:6px 10px;
+  border-radius:8px;
+  transition:all 0.2s ease;
+}
+
+.back-button:hover{
+  background:rgba(255,255,255,0.05);
+  color:#fff;
+  transform:translateX(-3px);
+}
+
+/* =========================
+   TEXT CENTER
+========================= */
+
+.text-center{
+text-align:center;
+color:#999;
+padding:16px;
+}

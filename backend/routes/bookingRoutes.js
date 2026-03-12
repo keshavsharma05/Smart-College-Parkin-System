@@ -5,8 +5,7 @@ const { protect } = require('../middleware/authMiddleware');
 const { authorizeRoles } = require('../middleware/roleMiddleware');
 
 router.use(protect);
-router.use(authorizeRoles('USER', 'STUDENT', 'TEACHER')); // Any user can access
-
+router.use(authorizeRoles('USER'));
 router.post('/create', createBooking);
 router.post('/cancel/:id', cancelBooking);
 router.get('/my-bookings', getMyBookings);

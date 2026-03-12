@@ -1,0 +1,312 @@
+/* =========================
+   AUTH PAGE BACKGROUND
+========================= */
+
+.auth-container{
+  min-height:100vh;
+  display:flex;
+  align-items:flex-start;
+  padding-top: 70px;
+  justify-content:center;
+
+  position:relative;
+  overflow:hidden;
+
+  background:#0b0d11;
+  color:#f1f5f9;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu;
+}
+
+/* blurred background image */
+
+.auth-container::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:url("/image.png") center/cover no-repeat;
+
+  filter:blur(18px) brightness(0.45) grayscale(0.25);
+  transform:scale(1.1);
+
+  z-index:0;
+}
+
+
+/* =========================
+   LOGIN CARD (GLASS STYLE)
+========================= */
+
+.auth-card{
+  width:420px;
+  padding:42px 38px;
+
+  border-radius:18px;
+
+  background:rgba(20,20,22,0.65);
+
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  border:1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+
+  position:relative;
+  z-index:2;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.auth-header{
+  text-align:center;
+  margin-bottom:36px;
+}
+
+.auth-header h1{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  font-size:26px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.auth-header p{
+  font-size:15px;
+  color:#9ca3af;
+}
+
+
+/* =========================
+   ALERT
+========================= */
+
+.alert{
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  padding:10px 12px;
+  margin-bottom:18px;
+
+  border-radius:8px;
+
+  font-size:14px;
+}
+
+.alert-error{
+  background:rgba(255,80,80,0.1);
+  border:1px solid rgba(255,80,80,0.3);
+  color:#ff6b6b;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group{
+  margin-bottom:20px;
+}
+
+.form-group label{
+  display:block;
+  font-size:14px;
+  margin-bottom:6px;
+  color:#cbd5f5;
+}
+
+.form-control{
+  width:100%;
+  padding:12px 14px;
+
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.08);
+
+  background:rgba(255,255,255,0.03);
+  color:#f1f5f9;
+
+  font-size:14px;
+
+  transition:all .25s ease;
+}
+
+.form-control::placeholder{
+  color:#6b7280;
+}
+
+.form-control:focus{
+  outline:none;
+  border:1px solid #d4a017;
+  background:rgba(255,255,255,0.05);
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  padding:12px 18px;
+  border-radius:10px;
+
+  font-size:15px;
+  font-weight:600;
+
+  cursor:pointer;
+  border:none;
+}
+
+.btn-block{
+  width:100%;
+}
+
+.btn-primary{
+  background:#d4a017;
+  color:#0b0d11;
+
+  transition:all .25s ease;
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+  opacity:0.9;
+}
+
+
+/* =========================
+   REGISTER LINK
+========================= */
+
+.auth-link{
+  text-align:center;
+  margin-top:22px;
+
+  font-size:14px;
+  color:#9ca3af;
+}
+
+.auth-link a{
+  color:#d4a017;
+  text-decoration:none;
+  font-weight:500;
+}
+
+.auth-link a:hover{
+  text-decoration:underline;
+}
+
+
+/* =========================
+   UTILITIES
+========================= */
+
+.flex{
+  display:flex;
+}
+
+.align-center{
+  align-items:center;
+}
+
+.gap-sm{
+  gap:8px;
+}
+
+.text-muted{
+  color:#9ca3af;
+}
+
+.mt-2{
+  margin-top:12px;
+}
+/* =========================
+   BRAND (LOGO + NAME)
+========================= */
+
+.brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.brand-logo{
+  width:38px;
+  height:38px;
+  object-fit:contain;
+}
+
+.brand-name{
+  font-size:26px;
+  font-weight:700;
+  letter-spacing:0.5px;
+
+  background:linear-gradient(90deg,#facc15,#d4a017);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width:768px){
+.auth-container{
+  padding:110px 10px;
+}
+  .auth-card{
+    width:92%;
+    padding:34px 28px;
+  }
+
+  .brand-name{
+    font-size:22px;
+  }
+
+  .brand-logo{
+    width:34px;
+    height:34px;
+  }
+
+  .form-control{
+    padding:13px 14px;
+    font-size:15px;
+  }
+
+  .btn{
+    padding:13px 18px;
+    font-size:15px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .auth-card{
+    padding:28px 22px;
+    border-radius:16px;
+  }
+
+  .brand-name{
+    font-size:20px;
+  }
+
+  .auth-header p{
+    font-size:13px;
+  }
+
+}

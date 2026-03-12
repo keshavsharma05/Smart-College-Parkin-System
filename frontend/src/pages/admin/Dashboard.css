@@ -1,0 +1,329 @@
+/* ==============================
+   ADMIN DASHBOARD LAYOUT
+================================ */
+
+.main-content{
+max-width:1100px;
+margin:auto;
+padding:60px 28px 80px;
+color:#e6e6e6;
+font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
+
+/* ==============================
+   HEADER
+================================ */
+
+.flex{
+display:flex;
+}
+
+.justify-between{
+justify-content:space-between;
+}
+
+.align-center{
+align-items:center;
+}
+
+.mb-2{
+margin-bottom:28px;
+}
+
+.main-content h2{
+font-size:28px;
+font-weight:600;
+letter-spacing:-0.3px;
+color:#ffffff;
+}
+
+
+/* ==============================
+   ACTION BUTTONS
+================================ */
+
+.admin-actions{
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+}
+
+
+/* ==============================
+   BUTTONS
+================================ */
+
+.btn{
+display:inline-flex;
+align-items:center;
+gap:8px;
+
+padding:8px 16px;
+
+border-radius:10px;
+
+font-size:14px;
+font-weight:600;
+
+text-decoration:none;
+
+transition:all .25s ease;
+}
+
+.btn-primary{
+background:rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.15);
+color:white;
+backdrop-filter:blur(12px);
+}
+
+.btn-primary:hover{
+background:rgba(255,255,255,0.2);
+transform:translateY(-2px);
+}
+
+
+/* ==============================
+   STATS GRID
+================================ */
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+
+/* ==============================
+   CARD BASE
+================================ */
+
+.card{
+background:rgba(20,20,22,0.55);
+border:1px solid rgba(255,255,255,0.08);
+border-radius:18px;
+padding:22px;
+
+backdrop-filter:blur(16px);
+
+transition:all .25s ease;
+
+box-shadow:0 12px 35px rgba(0,0,0,0.45);
+}
+
+.card:hover{
+transform:translateY(-6px);
+border-color:rgba(255,255,255,0.18);
+box-shadow:0 18px 50px rgba(0,0,0,0.6);
+}
+
+
+/* ==============================
+   STAT CARD
+================================ */
+
+.stat-card{
+display:flex;
+align-items:center;
+gap:16px;
+min-height:90px;
+}
+
+
+/* ==============================
+   ICON
+================================ */
+
+.stat-icon{
+width:46px;
+height:46px;
+
+border-radius:12px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:rgba(255,255,255,0.08);
+color:#e6e6e6;
+
+backdrop-filter:blur(10px);
+}
+
+
+/* ==============================
+   STAT TEXT
+================================ */
+
+.stat-info h3{
+font-size:13px;
+font-weight:500;
+color:#a5a5a5;
+margin-bottom:4px;
+}
+
+.stat-info p{
+font-size:22px;
+font-weight:600;
+color:#ffffff;
+}
+
+
+/* ==============================
+   TABLET (≤1024px)
+================================ */
+
+@media (max-width:1024px){
+
+.main-content{
+padding:50px 24px 70px;
+}
+
+.main-content h2{
+font-size:24px;
+}
+
+.stats-grid{
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+}
+
+.card{
+padding:20px;
+}
+
+.stat-info p{
+font-size:20px;
+}
+
+}
+
+
+/* ==============================
+   MOBILE (≤768px)
+================================ */
+
+@media (max-width:768px){
+
+.main-content{
+padding:40px 20px 60px;
+}
+
+/* stack header */
+
+.flex.justify-between{
+flex-direction:column;
+align-items:flex-start;
+gap:16px;
+}
+
+.stats-grid{
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+}
+
+.card{
+padding:18px;
+}
+
+.stat-card{
+gap:12px;
+}
+
+.stat-icon{
+width:40px;
+height:40px;
+}
+
+.stat-info p{
+font-size:19px;
+}
+
+}
+
+
+/* ==============================
+   SMALL PHONES (≤420px)
+================================ */
+
+@media (max-width:420px){
+
+.stats-grid{
+grid-template-columns:1fr;
+}
+
+.main-content{
+padding:32px 16px 50px;
+}
+
+.main-content h2{
+font-size:22px;
+}
+
+.btn{
+font-size:13px;
+padding:7px 14px;
+}
+
+.card{
+padding:16px;
+}
+
+.stat-icon{
+width:36px;
+height:36px;
+}
+
+.stat-info p{
+font-size:18px;
+}
+
+}
+/* ==============================
+   STATS GRID
+================================ */
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+
+/* Tablet */
+
+@media (max-width:1024px){
+.stats-grid{
+grid-template-columns:repeat(2,1fr);
+}
+}
+
+
+/* Phone */
+
+@media (max-width:768px){
+
+.stats-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+}
+
+.card{
+padding:16px;
+}
+
+.stat-card{
+gap:10px;
+}
+
+.stat-icon{
+width:36px;
+height:36px;
+}
+
+.stat-info p{
+font-size:18px;
+}
+
+}

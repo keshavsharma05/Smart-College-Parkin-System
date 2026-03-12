@@ -3,7 +3,6 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import Navbar from './components/Navbar';
-import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
@@ -17,7 +16,7 @@ import StaffDashboard from './pages/staff/StaffDashboard';
 // User
 import UserDashboard from './pages/user/UserDashboard';
 import BookSlot from './pages/user/BookSlot';
-
+import CreateStaff from './pages/admin/CreateStaff';
 function App() {
   return (
     <Router>
@@ -25,8 +24,7 @@ function App() {
         <div className="app-container">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             
             {/* Admin Routes */}
@@ -40,7 +38,11 @@ function App() {
                 <SlotManagement />
               </ProtectedRoute>
             } />
-            
+            <Route path="/admin/create-staff" element={
+  <ProtectedRoute allowedRoles={['ADMIN']}>
+    <CreateStaff />
+  </ProtectedRoute>
+} />
             {/* Staff Routes */}
             <Route path="/staff" element={
               <ProtectedRoute allowedRoles={['STAFF']}>
