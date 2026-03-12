@@ -16,7 +16,7 @@ import StaffDashboard from './pages/staff/StaffDashboard';
 // User
 import UserDashboard from './pages/user/UserDashboard';
 import BookSlot from './pages/user/BookSlot';
-import CreateStaff from './pages/admin/CreateStaff';
+import CreateStaff from './pages/admin/createStaff';
 function App() {
   return (
     <Router>
