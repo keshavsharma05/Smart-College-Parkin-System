@@ -7,7 +7,7 @@
   display:flex;
   align-items:center;
   justify-content:center;
-
+padding: 30px;
   position:relative;
   overflow:hidden;
 
@@ -16,9 +16,6 @@
 
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
-
-
-/* blurred background image */
 
 .register-page::before{
   content:"";
@@ -34,32 +31,52 @@
 }
 
 
-
 /* =========================
-   REGISTER BOX
+   REGISTER CARD
 ========================= */
 
 .register-card{
-  width:500px;
-  padding:22px 38px;
+  width:520px;
+  padding:40px 42px;
 
   border-radius:18px;
 
   background:rgba(20,20,22,0.65);
 
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 
   border:1px solid rgba(255,255,255,0.08);
 
   box-shadow:
-    0 40px 80px rgba(0,0,0,0.7),
-    inset 0 0 0 1px rgba(255,255,255,0.04);
+  0 40px 90px rgba(0,0,0,0.75),
+  inset 0 0 0 1px rgba(255,255,255,0.04);
 
   position:relative;
   z-index:2;
+
+  animation:cardEnter .5s ease;
 }
 
+/* subtle gold glow */
+
+.register-card::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+
+  border-radius:18px;
+
+  background:linear-gradient(
+    120deg,
+    rgba(212,160,23,0.25),
+    transparent,
+    rgba(212,160,23,0.15)
+  );
+
+  opacity:.18;
+  z-index:-1;
+}
 
 
 /* =========================
@@ -76,17 +93,19 @@
   align-items:center;
   justify-content:center;
   gap:10px;
+}
 
-  font-size:26px;
-  font-weight:700;
+.brand-logo{
+  width:40px;
+  height:40px;
+  object-fit:contain;
 }
 
 .subtitle{
-  margin-top:6px;
+  margin-top:10px;
   font-size:14px;
   color:#9ca3af;
 }
-
 
 
 /* =========================
@@ -112,28 +131,39 @@
 }
 
 
-
 /* =========================
    SECTION TITLES
 ========================= */
 
 .section-title{
-  font-size:12px;
+  font-size:11px;
   font-weight:600;
 
-  letter-spacing:0.08em;
+  letter-spacing:.12em;
   text-transform:uppercase;
 
-  color:#9ca3af;
+  color:#6b7280;
 
-  margin-bottom:10px;
-  margin-top:22px;
+  margin-top:28px;
+  margin-bottom:14px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.section-title::after{
+  content:"";
+  flex:1;
+
+  height:1px;
+
+  background:rgba(255,255,255,0.06);
 }
 
 
-
 /* =========================
-   FORM GRID
+   GRID
 ========================= */
 
 .form-grid{
@@ -143,28 +173,17 @@
 }
 
 
-
 /* =========================
    FORM GROUP
 ========================= */
 
 .form-group{
-  margin-bottom: 10px;
+  margin-bottom:10px;
 }
-
-.form-group label{
-  display:block;
-
-  font-size:14px;
-  margin-bottom:6px;
-
-  color:#cbd5f5;
-}
-
 
 
 /* =========================
-   INPUTS
+   INPUT WRAPPER
 ========================= */
 
 .input-wrapper{
@@ -179,6 +198,11 @@
   color:#9ca3af;
 }
 
+
+/* =========================
+   INPUTS
+========================= */
+
 .input-wrapper input{
   width:100%;
 
@@ -187,7 +211,8 @@
   border-radius:10px;
   border:1px solid rgba(255,255,255,0.08);
 
-background: rgba(255,255,255,0.03);  color:#f1f5f9;
+  background:rgba(255,255,255,0.03);
+  color:#f1f5f9;
 
   font-size:14px;
 
@@ -200,9 +225,13 @@ background: rgba(255,255,255,0.03);  color:#f1f5f9;
 
 .input-wrapper input:focus{
   outline:none;
-  border:1px solid #d4a017;
-}
 
+  border:1px solid #d4a017;
+
+  background:rgba(255,255,255,0.05);
+
+  box-shadow:0 0 0 3px rgba(212,160,23,0.15);
+}
 
 
 /* =========================
@@ -216,28 +245,32 @@ select{
   border-radius:10px;
   border:1px solid rgba(255,255,255,0.08);
 
-background: rgba(255,255,255,0.03);  color:#f1f5f9;
+  background:rgba(255,255,255,0.03);
+  color:#f1f5f9;
 
   font-size:14px;
+
+  transition:all .25s ease;
 }
 
 select:focus{
   outline:none;
+
   border:1px solid #d4a017;
+
+  box-shadow:0 0 0 3px rgba(212,160,23,0.15);
 }
 
 
-
 /* =========================
-   BUTTON
+   REGISTER BUTTON
 ========================= */
 
 .register-btn{
-  margin-top:10px;
+  margin-top:18px;
 
   width:100%;
-
-  padding:13px 18px;
+  padding:14px 18px;
 
   border-radius:10px;
   border:none;
@@ -247,16 +280,23 @@ select:focus{
 
   cursor:pointer;
 
-  background:#d4a017;
-  color:#0b0d11;
+  background:linear-gradient(135deg,#facc15,#d4a017);
+
+  color:#111;
+
+  box-shadow:
+  0 10px 25px rgba(212,160,23,0.35);
 
   transition:all .25s ease;
 }
 
 .register-btn:hover{
   transform:translateY(-2px);
-}
 
+  box-shadow:
+  0 14px 35px rgba(212,160,23,0.45),
+  0 0 20px rgba(212,160,23,0.25);
+}
 
 
 /* =========================
@@ -265,7 +305,6 @@ select:focus{
 
 .login-link{
   text-align:center;
-
   margin-top:20px;
 
   font-size:14px;
@@ -276,6 +315,7 @@ select:focus{
   color:#d4a017;
   margin-left:6px;
   text-decoration:none;
+  font-weight:500;
 }
 
 .login-link a:hover{
@@ -283,12 +323,32 @@ select:focus{
 }
 
 
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes cardEnter{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-@media (max-width:600px){
+@media (max-width:650px){
+
+  .register-card{
+    width:92%;
+    padding:32px 26px;
+  }
 
   .form-grid{
     grid-template-columns:1fr;

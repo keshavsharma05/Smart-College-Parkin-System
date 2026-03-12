@@ -83,3 +83,27 @@ a{
   text-decoration:none;
   color:inherit;
 }
+/* =========================
+   CALM PREMIUM SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:#0b0d11;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#5a4a1a;   /* muted gold */
+
+  border-radius:10px;
+  border:2px solid #0b0d11;
+
+  transition:background .2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:#7a6423;   /* slightly brighter on hover */
+}

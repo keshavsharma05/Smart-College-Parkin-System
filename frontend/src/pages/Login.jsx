@@ -36,7 +36,6 @@ const Login = () => {
 <div className="auth-header">
   <div className="brand">
     <img src={logo} alt="ParkFlow Logo" className="brand-logo"/>
-    <span className="brand-name">ParkFlow</span>
   </div>
 
   <p>Sign in to your account</p>
@@ -52,39 +51,41 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Email Address</label>
-            <div className="flex align-center gap-sm">
-              <Mail size={18} className="text-muted" style={{ position: 'absolute', marginLeft: '1rem' }} />
-              <input 
-                type="email" 
-                className="form-control" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Ex. john@campus.edu"
-                style={{ paddingLeft: '2.5rem' }}
-                required 
-              />
-            </div>
+<div className="input-wrapper">
+  <Mail size={18} className="input-icon" />
+  <input 
+    type="email"
+    className="form-control"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+    placeholder="Ex. john@campus.edu"
+    required
+  />
+</div>
           </div>
           
           <div className="form-group">
             <label>Password</label>
-            <div className="flex align-center gap-sm">
-              <Lock size={18} className="text-muted" style={{ position: 'absolute', marginLeft: '1rem' }} />
-              <input 
-                type="password" 
-                className="form-control" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="********"
-                style={{ paddingLeft: '2.5rem' }}
-                required 
-              />
-            </div>
+<div className="input-wrapper">
+  <Lock size={18} className="input-icon" />
+  <input 
+    type="password"
+    className="form-control"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="********"
+    required
+  />
+</div>
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block mt-2" disabled={isLoading}>
-            {isLoading ? 'Signing In...' : 'Sign In'}
-          </button>
+<button
+  type="submit"
+  className="login-btn"
+  disabled={isLoading}
+>
+  {isLoading ? "Signing In..." : "Sign In"}
+</button>
         </form>
 
         <div className="auth-link">

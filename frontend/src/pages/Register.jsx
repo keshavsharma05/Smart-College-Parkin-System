@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import {
-Car,
 Mail,
 Lock,
 User,
@@ -10,7 +9,7 @@ Briefcase,
 Hash,
 AlertCircle
 } from "lucide-react";
-
+import logo from "../assets/logo.png";
 import "./Register.css";
 
 const Register = () => {
@@ -60,8 +59,7 @@ return (
     <div className="register-header">
 
       <div className="brand">
-        <Car size={32}/>
-        <span>CampusPark</span>
+    <img src={logo} alt="ParkFlow Logo" className="brand-logo"/>
       </div>
 
       <p className="subtitle">

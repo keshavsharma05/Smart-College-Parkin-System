@@ -1,23 +1,22 @@
 /* =========================
-   AUTH PAGE BACKGROUND
+   PAGE BACKGROUND
 ========================= */
 
 .auth-container{
   min-height:100vh;
   display:flex;
-  align-items:flex-start;
-  padding-top: 70px;
+  align-items:center;
   justify-content:center;
+  padding:30px;
 
   position:relative;
   overflow:hidden;
 
   background:#0b0d11;
   color:#f1f5f9;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu;
-}
 
-/* blurred background image */
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
 
 .auth-container::before{
   content:"";
@@ -34,28 +33,50 @@
 
 
 /* =========================
-   LOGIN CARD (GLASS STYLE)
+   LOGIN CARD
 ========================= */
 
 .auth-card{
   width:420px;
-  padding:42px 38px;
+  padding:40px 42px;
 
   border-radius:18px;
 
   background:rgba(20,20,22,0.65);
 
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 
   border:1px solid rgba(255,255,255,0.08);
 
   box-shadow:
-    0 40px 80px rgba(0,0,0,0.7),
-    inset 0 0 0 1px rgba(255,255,255,0.04);
+  0 40px 90px rgba(0,0,0,0.75),
+  inset 0 0 0 1px rgba(255,255,255,0.04);
 
   position:relative;
   z-index:2;
+
+  animation:cardEnter .5s ease;
+}
+
+/* subtle gold glow */
+
+.auth-card::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+
+  border-radius:18px;
+
+  background:linear-gradient(
+    120deg,
+    rgba(212,160,23,0.25),
+    transparent,
+    rgba(212,160,23,0.15)
+  );
+
+  opacity:.18;
+  z-index:-1;
 }
 
 
@@ -65,22 +86,25 @@
 
 .auth-header{
   text-align:center;
-  margin-bottom:36px;
+  margin-bottom:28px;
 }
 
-.auth-header h1{
+.brand{
   display:flex;
   align-items:center;
   justify-content:center;
   gap:10px;
+}
 
-  font-size:26px;
-  font-weight:700;
-  margin-bottom:6px;
+.brand-logo{
+  width:40px;
+  height:40px;
+  object-fit:contain;
 }
 
 .auth-header p{
-  font-size:15px;
+  margin-top:10px;
+  font-size:14px;
   color:#9ca3af;
 }
 
@@ -114,19 +138,44 @@
 ========================= */
 
 .form-group{
-  margin-bottom:20px;
+  margin-bottom:16px;
 }
 
 .form-group label{
   display:block;
+
   font-size:14px;
   margin-bottom:6px;
+
   color:#cbd5f5;
 }
 
+
+/* =========================
+   INPUT WRAPPER
+========================= */
+
+.input-wrapper{
+  position:relative;
+}
+
+.input-icon{
+  position:absolute;
+  left:12px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#9ca3af;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
 .form-control{
   width:100%;
-  padding:12px 14px;
+
+  padding:12px 14px 12px 38px;
 
   border-radius:10px;
   border:1px solid rgba(255,255,255,0.08);
@@ -145,40 +194,54 @@
 
 .form-control:focus{
   outline:none;
+
   border:1px solid #d4a017;
+
   background:rgba(255,255,255,0.05);
+
+  box-shadow:0 0 0 3px rgba(212,160,23,0.15);
 }
 
 
 /* =========================
-   BUTTONS
+   LOGIN BUTTON
 ========================= */
 
-.btn{
-  padding:12px 18px;
+.login-btn{
+  margin-top:18px;
+
+  width:100%;
+  padding:14px 18px;
+
   border-radius:10px;
+  border:none;
 
   font-size:15px;
   font-weight:600;
 
   cursor:pointer;
-  border:none;
-}
 
-.btn-block{
-  width:100%;
-}
+  background:linear-gradient(135deg,#facc15,#d4a017);
 
-.btn-primary{
-  background:#d4a017;
-  color:#0b0d11;
+  color:#111;
+
+  box-shadow:
+  0 10px 25px rgba(212,160,23,0.35);
 
   transition:all .25s ease;
 }
 
-.btn-primary:hover{
+.login-btn:hover{
   transform:translateY(-2px);
-  opacity:0.9;
+
+  box-shadow:
+  0 14px 35px rgba(212,160,23,0.45),
+  0 0 20px rgba(212,160,23,0.25);
+}
+
+.login-btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 
@@ -188,7 +251,7 @@
 
 .auth-link{
   text-align:center;
-  margin-top:22px;
+  margin-top:20px;
 
   font-size:14px;
   color:#9ca3af;
@@ -196,6 +259,7 @@
 
 .auth-link a{
   color:#d4a017;
+  margin-left:6px;
   text-decoration:none;
   font-weight:500;
 }
@@ -206,107 +270,30 @@
 
 
 /* =========================
-   UTILITIES
+   ANIMATION
 ========================= */
 
-.flex{
-  display:flex;
+@keyframes cardEnter{
+  from{
+    opacity:0;
+    transform:translateY(20px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
 
-.align-center{
-  align-items:center;
-}
-
-.gap-sm{
-  gap:8px;
-}
-
-.text-muted{
-  color:#9ca3af;
-}
-
-.mt-2{
-  margin-top:12px;
-}
-/* =========================
-   BRAND (LOGO + NAME)
-========================= */
-
-.brand{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.brand-logo{
-  width:38px;
-  height:38px;
-  object-fit:contain;
-}
-
-.brand-name{
-  font-size:26px;
-  font-weight:700;
-  letter-spacing:0.5px;
-
-  background:linear-gradient(90deg,#facc15,#d4a017);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
 
 /* =========================
    RESPONSIVE
 ========================= */
 
-/* =========================
-   MOBILE RESPONSIVE
-========================= */
+@media (max-width:650px){
 
-@media (max-width:768px){
-.auth-container{
-  padding:110px 10px;
-}
   .auth-card{
     width:92%;
-    padding:34px 28px;
-  }
-
-  .brand-name{
-    font-size:22px;
-  }
-
-  .brand-logo{
-    width:34px;
-    height:34px;
-  }
-
-  .form-control{
-    padding:13px 14px;
-    font-size:15px;
-  }
-
-  .btn{
-    padding:13px 18px;
-    font-size:15px;
-  }
-
-}
-
-@media (max-width:480px){
-
-  .auth-card{
-    padding:28px 22px;
-    border-radius:16px;
-  }
-
-  .brand-name{
-    font-size:20px;
-  }
-
-  .auth-header p{
-    font-size:13px;
+    padding:32px 26px;
   }
 
 }
