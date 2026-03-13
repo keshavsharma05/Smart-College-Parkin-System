@@ -4,12 +4,14 @@ import { Plus, Trash2, MapPin, AlertCircle } from 'lucide-react';
 import  './SlotManagement.css';
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 const SlotManagement = () => {
   const [slots, setSlots] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  
+  const navigate = useNavigate();
+const queryClient = useQueryClient();
   const [newSlot, setNewSlot] = useState({
     slotNumber: '',
     slotType: 'STUDENT',
@@ -37,10 +39,34 @@ const SlotManagement = () => {
     setError('');
     setSuccess('');
     try {
-      await api.post('/admin/create-slot', newSlot);
-      setSuccess('Slot created successfully!');
-      setNewSlot({ slotNumber: '', slotType: 'STUDENT', location: '' });
-      fetchSlots();
+const res = await api.post('/admin/create-slot', newSlot);
+
+setSuccess('Slot created successfully!');
+setNewSlot({ slotNumber: '', slotType: 'STUDENT', location: '' });
+
+fetchSlots();
+
+/* instantly update dashboard cache */
+queryClient.setQueryData(['adminDashboard'], (old) => {
+  if (!old) return old;
+
+  return {
+    ...old,
+    totalSlots: old.totalSlots + 1,
+    availableSlots: old.availableSlots + 1,
+    studentTotal:
+      newSlot.slotType === 'STUDENT'
+        ? old.studentTotal + 1
+        : old.studentTotal,
+    teacherTotal:
+      newSlot.slotType === 'TEACHER'
+        ? old.teacherTotal + 1
+        : old.teacherTotal
+  };
+});
+
+/* background sync with server */
+queryClient.invalidateQueries(['adminDashboard']);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to create slot');
     }
@@ -51,14 +77,27 @@ const SlotManagement = () => {
     setError('');
     setSuccess('');
     try {
-      await api.delete(`/admin/delete-slot/${id}`);
-      setSuccess('Slot deleted successfully!');
-      fetchSlots();
+await api.delete(`/admin/delete-slot/${id}`);
+
+setSuccess('Slot deleted successfully!');
+fetchSlots();
+
+/* notify dashboard cache */
+queryClient.setQueryData(['adminDashboard'], (old) => {
+  if (!old) return old;
+
+  return {
+    ...old,
+    totalSlots: old.totalSlots - 1
+  };
+});
+
+queryClient.invalidateQueries(['adminDashboard']);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to delete slot');
     }
   };
-const navigate = useNavigate();
+
   return (
     <div className="main-content flex gap-2" style={{ flexDirection: 'column' }}>
           <div className="back-button" onClick={() => navigate("/admin")}>

@@ -1,66 +1,77 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { Car, LogOut, User as UserIcon } from "lucide-react";
+import { LogOut, User as UserIcon } from "lucide-react";
 import "./Navbar.css";
 import logo from "../assets/logo.png";
+
 const Navbar = () => {
-const { user, logout } = useContext(AuthContext);
-const navigate = useNavigate();
 
-const handleLogout = () => {
-logout();
-navigate("/");
-};
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-return ( <nav className="navbar">
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
-  {/* BRAND */}
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
-<Link to="/" className="navbar-brand">
-  <img src={logo} alt="ParkFlow Logo" className="navbar-logo" />
-  ParkFlow
-</Link>
+  return (
+    <nav className="navbar">
 
-  {/* RIGHT SIDE */}
+      {/* BRAND */}
+      <Link to="/" className="navbar-brand">
+        <img src={logo} alt="ParkFlow Logo" className="navbar-logo" />
+        ParkFlow
+      </Link>
 
-  {user ? (
-    <div className="navbar-links">
+      {/* RIGHT SIDE */}
 
+      {user ? (
 
-      {/* STAFF LINK */}
+        <div className="navbar-user">
 
+          {/* USER NAME */}
+          <div className="navbar-username" onClick={toggleDropdown}>
+            <UserIcon size={16} />
+            {user.name}
+          </div>
 
-      {/* USER INFO + LOGOUT */}
+          {/* DROPDOWN (mobile) */}
+          {dropdownOpen && (
+            <div className="navbar-dropdown">
+              <button onClick={handleLogout}>
+                <LogOut size={16} />
+                Logout
+              </button>
+            </div>
+          )}
 
-      <div className="navbar-user">
+          {/* DESKTOP LOGOUT BUTTON */}
+          <button
+            onClick={handleLogout}
+            className="nav-btn-danger navbar-logout-desktop"
+          >
+            <LogOut size={16} />
+          </button>
 
-        <span className="navbar-username">
-          <UserIcon size={16} />
-          {user.name}
-        </span>
+        </div>
 
-        <button onClick={handleLogout} className="nav-btn-danger">
-          <LogOut size={16} />
-          
-        </button>
+      ) : (
 
-      </div>
+        <div className="navbar-links">
+          <Link to="/" className="nav-btn-secondary">Login</Link>
+          <Link to="/register" className="nav-btn-primary">Register</Link>
+        </div>
 
-    </div>
+      )}
 
-  ) : (
-
-    <div className="navbar-links">
-      <Link to="/" className="nav-btn-secondary">Login</Link>
-      <Link to="/register" className="nav-btn-primary">Register</Link>
-    </div>
-
-  )}
-
-</nav>
-
-);
+    </nav>
+  );
 };
 
 export default Navbar;

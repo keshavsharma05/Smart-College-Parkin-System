@@ -4,7 +4,10 @@ import { UserPlus, AlertCircle, CheckCircle } from "lucide-react";
 import "./createStaff.css";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 const CreateStaff = () => {
+const navigate = useNavigate();
+const queryClient = useQueryClient();
 
 const [form, setForm] = useState({
 name: "",
@@ -30,15 +33,28 @@ setSuccess("");
 
 try {
 
-  await api.post("/admin/create-staff", form);
+await api.post("/admin/create-staff", form);
 
-  setSuccess("Staff account created successfully!");
+setSuccess("Staff account created successfully!");
 
-  setForm({
-    name: "",
-    email: "",
-    password: ""
-  });
+setForm({
+  name: "",
+  email: "",
+  password: ""
+});
+
+/* instantly update dashboard cache */
+queryClient.setQueryData(["adminDashboard"], (old) => {
+  if (!old) return old;
+
+  return {
+    ...old,
+    totalUsers: old.totalUsers + 1
+  };
+});
+
+/* background sync with server */
+queryClient.invalidateQueries(["adminDashboard"]);
 
 } catch (err) {
 
@@ -50,7 +66,6 @@ try {
 }
 
 };
-const navigate = useNavigate();
 return ( <div className="staff-container">
 
   <div className="staff-card">

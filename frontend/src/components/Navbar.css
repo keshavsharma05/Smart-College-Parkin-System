@@ -200,10 +200,67 @@
   background:rgba(255,80,80,0.22);
 }
 
+.navbar-username{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  color:#9ca3af;
+  cursor:pointer;
+}
+.navbar-dropdown{
+  position:absolute;
+  top:42px;
+  right:0;
 
-/* =========================
-   RESPONSIVE
-========================= */
+  background:rgba(20,20,20,0.95);
+  backdrop-filter:blur(10px);
+
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px;
+
+  padding:8px;
+  min-width:120px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.6);
+
+  z-index:200;
+}
+
+.navbar-dropdown button{
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  width:100%;
+  padding:8px 10px;
+
+  background:none;
+  border:none;
+  color:#ff6b6b;
+
+  cursor:pointer;
+  font-size:13px;
+}
+
+.navbar-dropdown button:hover{
+  background:rgba(255,255,255,0.06);
+}
+.navbar-user{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  margin-left:24px;
+  padding-left:20px;
+
+  border-left:1px solid rgba(255,255,255,0.08);
+}
+
+.navbar-logout-desktop{
+  display:flex;
+}
 
 @media (max-width:820px){
 
@@ -212,6 +269,10 @@
   }
 
   .navbar-links{
+    display:none;
+  }
+
+  .navbar-logout-desktop{
     display:none;
   }
 

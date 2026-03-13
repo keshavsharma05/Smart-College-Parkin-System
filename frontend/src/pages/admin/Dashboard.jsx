@@ -1,36 +1,43 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import api from '../../api/axios';
-import { 
-  Users, 
-  MapPin, 
-  CheckCircle, 
-  Car, 
-  AlertTriangle,
-  FileText
+import {
+  Users,
+  MapPin,
+  CheckCircle,
+  Car
 } from 'lucide-react';
 import './Dashboard.css';
+
 const AdminDashboard = () => {
-  const [stats, setStats] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchStats();
-  }, []);
-
-  const fetchStats = async () => {
-    try {
+  const { data: stats, isLoading } = useQuery({
+    queryKey: ['adminDashboard'],
+    queryFn: async () => {
       const res = await api.get('/admin/dashboard');
-      setStats(res.data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Failed to fetch stats', error);
-      setLoading(false);
-    }
-  };
+      return res.data;
+    },
+staleTime: 1000 * 60 * 2,
+refetchOnWindowFocus: false,
+keepPreviousData: true  });
 
-  if (loading) return <div className="app-container"><div className="main-content"><h2>Loading Dashboard...</h2></div></div>;
-
+  if (isLoading) {
+    return (
+      <div className="main-content">
+        <div className="stats-grid">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div className="card stat-card skeleton-card" key={i}>
+              <div className="skeleton-icon"></div>
+              <div className="skeleton-lines">
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="main-content">
 <div className="flex justify-between align-center mb-2">
