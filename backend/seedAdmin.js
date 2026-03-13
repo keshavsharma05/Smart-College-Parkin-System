@@ -18,7 +18,7 @@ const hashed = await bcrypt.hash("admin123",10);
 
 await User.create({
  name:"System Admin",
- email:"admin@campuspark.com",
+ email:"admin@parkflow.com",
  password:hashed,
  role:"ADMIN"
 });

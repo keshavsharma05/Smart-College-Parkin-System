@@ -2,19 +2,38 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
-
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const mongoSanitize = require("express-mongo-sanitize");
 // Load env vars
 dotenv.config();
-
 // Connect to database
 connectDB();
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+// Security middleware
+app.use(helmet());
 
+// Rate limiter
+const limiter = rateLimit({
+ windowMs: 15 * 60 * 1000,
+ max: 100,
+ message: "Too many requests from this IP, please try again later."
+});
+
+app.use("/api", limiter);
+app.use(mongoSanitize());
+// CORS
+app.use(cors({
+  origin: [
+    "https://your-landing-page.vercel.app",
+    "https://parkflow-app-rho.vercel.app"
+  ],
+  credentials: true
+}));
+// Body parser
+app.use(express.json());
 // Route files
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');

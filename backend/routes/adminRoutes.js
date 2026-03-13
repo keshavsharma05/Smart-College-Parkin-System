@@ -16,24 +16,26 @@ const { authorizeRoles } = require('../middleware/roleMiddleware');
 
 router.use(protect);
 router.use(authorizeRoles('ADMIN'));
-router.post('/create-staff', async(req,res)=>{
+router.post("/create-staff", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
 
-  
-  const {name,email,password} = req.body;
-  
-  const existing = await User.findOne({email});
-  if(existing) return res.status(400).json({message:"User exists"});
-  const hashed = await bcrypt.hash(password,10);
+    const existing = await User.findOne({ email });
+    if (existing) return res.status(400).json({ message: "User exists" });
 
- const staff = await User.create({
-  name,
-  email,
-  password:hashed,
-  role:"STAFF"
- });
+    const hashed = await bcrypt.hash(password, 10);
 
- res.json(staff);
+    const staff = await User.create({
+      name,
+      email,
+      password: hashed,
+      role: "STAFF",
+    });
 
+    res.json(staff);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to create staff" });
+  }
 });
 
 
