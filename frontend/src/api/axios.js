@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://192.168.1.7:5000/api',
+  baseURL: 'https://smart-college-parkin-system-production.up.railway.app/api',
 });
 
 api.interceptors.request.use(
