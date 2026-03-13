@@ -28,7 +28,8 @@ app.use(mongoSanitize());
 app.use(cors({
   origin: [
     "https://your-landing-page.vercel.app",
-    "https://parkflow-app-rho.vercel.app"
+    "https://parkflow-app-rho.vercel.app",
+        "http://localhost:5173"
   ],
   credentials: true
 }));
