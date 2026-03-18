@@ -23,6 +23,13 @@ const limiter = rateLimit({
 });
 
 app.use("/api", limiter);
+
+app.use("/api/bookings", rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 20,
+  message: "Too many booking attempts, slow down."
+}));
+
 app.use(mongoSanitize());
 // CORS
 app.use(cors({

@@ -15,30 +15,42 @@ exports.getAvailableSlots = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+const mongoose = require("mongoose");
 
 exports.createBooking = async (req, res) => {
   const { slotId } = req.body;
+
+  // ✅ Validate slotId
+  if (!slotId || !mongoose.Types.ObjectId.isValid(slotId)) {
+    return res.status(400).json({ message: "Invalid slot ID" });
+  }
+
   try {
     const activeBooking = await Booking.findOne({
       userId: req.user._id,
       status: { $in: ['BOOKED', 'ACTIVE'] }
     });
-    
+
     if (activeBooking) {
       return res.status(400).json({ message: 'You already have an active booking' });
     }
 
-    const slot = await ParkingSlot.findById(slotId);
-    if (!slot) return res.status(404).json({ message: 'Slot not found' });
-    
-    if (slot.status !== 'AVAILABLE') {
-      return res.status(400).json({ message: 'Slot is not available' });
+    // ✅ ATOMIC UPDATE (this is the real fix)
+    const slot = await ParkingSlot.findOneAndUpdate(
+      { _id: slotId, status: 'AVAILABLE' },
+      { status: 'RESERVED' },
+      { new: true }
+    );
+
+    if (!slot) {
+      return res.status(400).json({ message: 'Slot already taken' });
     }
-    
+
+    // still keep this check
     if (slot.slotType !== req.user.userType) {
       return res.status(403).json({ message: `You can only book ${slot.slotType} slots` });
     }
-    
+
     const booking = await Booking.create({
       userId: req.user._id,
       slotId: slot._id,
@@ -46,15 +58,12 @@ exports.createBooking = async (req, res) => {
       status: 'BOOKED'
     });
 
-    slot.status = 'RESERVED'; 
-    await slot.save();
-
     res.status(201).json(booking);
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
-
 exports.cancelBooking = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);

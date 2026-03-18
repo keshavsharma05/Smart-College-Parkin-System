@@ -32,7 +32,12 @@ router.post("/create-staff", async (req, res) => {
       role: "STAFF",
     });
 
-    res.json(staff);
+res.json({
+  id: staff._id,
+  name: staff.name,
+  email: staff.email,
+  role: staff.role
+});
   } catch (err) {
     res.status(500).json({ message: "Failed to create staff" });
   }
